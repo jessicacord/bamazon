@@ -29,7 +29,7 @@ function bamazon() {
     connection.query("SELECT * FROM products", function(err, results) {
         if (err) throw err;
 
-        console.log("Here are the available items:")
+        console.log("Here are the available items:".blue)
         results.forEach(function(result) {
 
             if(result.stock_quantity > 0 ) {
@@ -48,7 +48,7 @@ function buyItem() {
     inquirer.prompt([
         {
             name: "item_id",
-            message: "Enter the ID of the item you wish to buy",
+            message: "Enter the ID of the item you wish to buy".green,
             type: "input"
         }
     ]).then(function(answer){
@@ -59,14 +59,14 @@ function buyItem() {
             var selectedItem = res[0];
 
             if (!selectedItem) {
-                console.log("We could not find that item in our database");
+                console.log("We could not find that item in our database".green);
                 buyItem();
             } else {
                 function quantity() {
                     inquirer.prompt([
                         {
                             name: "quantity",
-                            message: "How many would you like to buy?",
+                            message: "How many would you like to buy?".green,
                             type: "input"
                         }
                     ]).then(function(answer){
@@ -76,10 +76,10 @@ function buyItem() {
                             console.log("There are only " + selectedItem.stock_quantity + " in stock.");
                             quantity();
                         } else {
-                            console.log("Your order is being placed...");
+                            console.log("Your order is being placed...".green);
 
                             var updatedQuantity = selectedItem.stock_quantity - answer.quantity;
-                            console.log("The new quantity is " + updatedQuantity);
+                            
 
                             connection.query("UPDATE products SET ? WHERE ?", [
                                 {
@@ -90,7 +90,7 @@ function buyItem() {
                                 }
                             ], function(err, res) {
                                 
-                                console.log("Your total is $" + selectedItem.price * answer.quantity);
+                                console.log(("Your total is $" + selectedItem.price * answer.quantity).green);
 
                                 continueShopping();
                             })
