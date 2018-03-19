@@ -115,7 +115,7 @@ function continueShopping() {
         }
     ]).then(function(answer){
         if (answer.continue) {
-            bamazon();
+            bamazonCustomer();
         } else {
             connection.end();
         }
