@@ -18,10 +18,10 @@ connection.connect(function(err) {
     if (err) throw err;
 
     console.log("Connected to database...\n")
-    bamazon();
+    bamazonCustomer();
 });
 
-function bamazon() {
+function bamazonCustomer() {
 
     console.log("--------------------\n"+
                 "Welcome to Bamazon!".yellow);
